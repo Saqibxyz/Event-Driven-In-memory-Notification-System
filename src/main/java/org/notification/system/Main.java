@@ -6,7 +6,5 @@ public class Main {
     public static void main(String[] args) {
         // to do
 
-        System.out.println("Hello");
-
     }
 }
