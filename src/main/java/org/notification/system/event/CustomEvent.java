@@ -2,22 +2,24 @@ package org.notification.system.event;
 
 import java.time.LocalDateTime;
 
-abstract public class CustomEvent {
-    int id;
+public abstract class CustomEvent {
     String details;
-    boolean highPriority = false;
+    boolean hasHighPriority = false;
     final LocalDateTime timeStamp = LocalDateTime.now();
 
-    public CustomEvent(int id, String details, boolean highPriority) {
-        this.id = id;
+    protected CustomEvent(String details, boolean hasHighPriority) {
         this.details = details;
-        this.highPriority = highPriority;
+        this.hasHighPriority = hasHighPriority;
     }
 
-    abstract public String getType();
+    public String getDetails() {
+        return details;
+    }
+
+    public abstract String getType();
 
     public boolean hasHighPriority() {
-        return highPriority;
+        return hasHighPriority;
     }
 
     public LocalDateTime getTimeStamp() {

@@ -5,20 +5,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Subscriber {
     String name;
     boolean isPreferringHighPriorityEvents = false;
     boolean isPreferringEventsDuringWorkingHours = false;
-    LocalTime workingHourStart, workingHourEnd;
+    LocalTime workingHourStart;
+    LocalTime workingHourEnd;
     Logger logger = LoggerFactory.getLogger(Subscriber.class);
 
     Subscriber(String name) {
         this.name = name;
     }
 
-    Subscriber(String name, boolean isPreferringHighPriorityEvents, boolean isPreferringEventsDuringWorkingHours,
-               LocalTime workingHourStart, LocalTime workingHourEnd
+    public Subscriber(String name, boolean isPreferringHighPriorityEvents, boolean isPreferringEventsDuringWorkingHours,
+                      LocalTime workingHourStart, LocalTime workingHourEnd
 
     ) {
         this.name = name;
@@ -33,7 +35,7 @@ public class Subscriber {
     }
 
     public void notifySubscriber(CustomEvent event) {
-        logger.info("{}  got notified with {} event at {}", name, event.getType(), event.getTimeStamp());
+        logger.info("{}  received {} at {}", name, event.getType(), event.getTimeStamp().format(DateTimeFormatter.ofPattern("dd/MM/yy hh:mm")));
 
     }
 
@@ -46,6 +48,11 @@ public class Subscriber {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
 }

@@ -11,24 +11,32 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServiceManager {
-    static Map<CustomEvent, CopyOnWriteArrayList<Subscriber>> subscribers = new ConcurrentHashMap<>();
-    static List<EventLog> history = new ArrayList<>();
+    Map<String, CopyOnWriteArrayList<Subscriber>> subscribers = new ConcurrentHashMap<>();
+    List<EventLog> history = new ArrayList<>();
+    static ServiceManager serviceManager = new ServiceManager();
 
-    public static void publish(CustomEvent event) {
-        subscribers.get(event).forEach(subscriber -> {
+    public static ServiceManager getInstanceOfServiceManager() {
+        return serviceManager;
+    }
+
+    public void publish(CustomEvent event) {
+        List<Subscriber> list = new ArrayList<>();
+        subscribers.get(event.getType()).forEach(subscriber -> {
+
                     if (subscriber.canBeNotified(event)) {
                         subscriber.notifySubscriber(event);
-                        history.add(new EventLog(event, subscriber));
+                        list.add(subscriber);
                     }
                 }
         );
+        history.add(new EventLog(event, list));
     }
 
-    public static void subscribe(CustomEvent event, Subscriber subscriber) {
-        subscribers.computeIfAbsent(event, k -> new CopyOnWriteArrayList<>()).add(subscriber);
+    public void subscribe(String eventName, Subscriber subscriber) {
+        subscribers.computeIfAbsent(eventName, k -> new CopyOnWriteArrayList<>()).add(subscriber);
     }
 
-    public static List<EventLog> getPastEvents(int hour) {
+    public List<EventLog> getPastEvents(int hour) {
         LocalDateTime dateTimeBeforeHour = LocalDateTime.now().minusHours(hour);
         return history.stream().filter(eventLog ->
                 eventLog.event.getTimeStamp().isAfter(dateTimeBeforeHour)

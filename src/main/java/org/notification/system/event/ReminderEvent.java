@@ -1,21 +1,20 @@
 package org.notification.system.event;
 
-public class NewTaskEvent extends CustomEvent {
-    public NewTaskEvent(String details, boolean highPriority) {
+public class ReminderEvent extends CustomEvent {
+    public ReminderEvent(String details, boolean highPriority) {
         super(details, highPriority);
     }
 
     @Override
     public String getType() {
-        return "NewTaskEvent";
+        return "ReminderEvent";
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
-        return obj.getClass().getSimpleName().equals("NewTaskEvent");
-
+        return obj.getClass().getSimpleName().equals("HeartBeatEvent");
     }
 
     @Override
