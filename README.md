@@ -19,12 +19,12 @@ At the core of the system lies the `ServiceManager`, which takes care of:
 - **Publishing:** Routes events to only those subscribers who want them, based on:
     - Priority filter (high/low)
     - Time filter (working hours)
-- **Event history:** Keeps past events with time logs and delivers them to admin on demand.
+- **Event history:** Keeps past events and delivers them to admin on demand.
 
 Other key roles:
 
-- `EventPublisher`: Manually creates & pushes new task events.
-- `EventReminder`: Fires reminder events every 10 seconds (via ScheduledExecutorService).
+- `EventPublisher`: Manually creates & pushes _**NewTaskEvent**_ events.
+- `EventReminder`: Fires **_ReminderEvent_** events every 10 seconds (via ScheduledExecutorService).
 - `Subscriber`: Has logic to decide if it wants to receive a certain event.
 - `Admin`: Can ask the system to list all events in the past X hours.
 
@@ -40,7 +40,7 @@ The image below shows how it all flows:
 src
 ├── main
 │   └── java
-│       └── org.notification.system
+│       └── notification_system
 │           ├── admin
 │           │   └── Admin.java
 │           ├── customExceptions
@@ -142,7 +142,7 @@ mvn test
 
 ## Credits
 
-Made by **Saqib Ayoub**  
+Made by **_Saqib Ayoub_**  
 Designed for performance, modularity, and future extensibility.
 ---
 
