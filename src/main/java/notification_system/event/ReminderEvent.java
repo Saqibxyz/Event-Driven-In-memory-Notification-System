@@ -1,4 +1,4 @@
-package org.notification.system.event;
+package notification_system.event;
 
 public class ReminderEvent extends CustomEvent {
     /**

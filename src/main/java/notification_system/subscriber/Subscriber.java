@@ -1,6 +1,6 @@
-package org.notification.system.subscriber;
+package notification_system.subscriber;
 
-import org.notification.system.event.CustomEvent;
+import notification_system.event.CustomEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

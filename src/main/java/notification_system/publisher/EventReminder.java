@@ -1,7 +1,8 @@
-package org.notification.system.publisher;
+package notification_system.publisher;
 
-import org.notification.system.event.ReminderEvent;
-import org.notification.system.service.ServiceManager;
+import notification_system.customExceptions.NullObjectException;
+import notification_system.event.ReminderEvent;
+import notification_system.service.ServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,9 +18,16 @@ public class EventReminder {
     /**
      * Publishes ReminderEvent after every 10 seconds continuously
      */
-    public void publishReminder() {
+    public void publishReminder() throws RuntimeException {
         executor = Executors.newScheduledThreadPool(1);
-        Runnable task = () -> ServiceManager.getInstanceOfServiceManager().publish(new ReminderEvent("This is a reminder", true));
+
+        Runnable task = () -> {
+            try {
+                ServiceManager.getInstanceOfServiceManager().publish(new ReminderEvent("This is a reminder", true));
+            } catch (NullObjectException e) {
+                throw new RuntimeException(e);
+            }
+        };
         executor.scheduleAtFixedRate(task, 0, 10, TimeUnit.SECONDS);
     }
 

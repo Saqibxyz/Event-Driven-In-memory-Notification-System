@@ -1,6 +1,6 @@
-package org.notification.system.admin;
+package notification_system.admin;
 
-import org.notification.system.service.ServiceManager;
+import notification_system.service.ServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,7 @@
-package org.notification.system.event;
+package notification_system.event;
 
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 
 public abstract class CustomEvent {
     String details;
@@ -12,6 +13,8 @@ public abstract class CustomEvent {
      * @param hasHighPriority whether event has high priority or not
      */
     protected CustomEvent(String details, boolean hasHighPriority) {
+        if (details == null || details.isEmpty())
+            throw new InputMismatchException("Please enter valid input. Details cannot be null");
         this.details = details;
         this.hasHighPriority = hasHighPriority;
         timeStamp = LocalDateTime.now();

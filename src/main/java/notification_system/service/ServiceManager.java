@@ -1,7 +1,8 @@
-package org.notification.system.service;
+package notification_system.service;
 
-import org.notification.system.event.CustomEvent;
-import org.notification.system.subscriber.Subscriber;
+import notification_system.customExceptions.NullObjectException;
+import notification_system.event.CustomEvent;
+import notification_system.subscriber.Subscriber;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class ServiceManager {
      *
      * @param event Event to be published
      */
-    public void publish(CustomEvent event) {
+    public void publish(CustomEvent event) throws NullObjectException {
+        if (event == null)
+            throw new NullObjectException("Event cannot be null");
         List<Subscriber> list = new ArrayList<>();
         if (!subscribers.containsKey(event.getType())) {
             subscribers.put(event.getType(), new CopyOnWriteArrayList<>());
