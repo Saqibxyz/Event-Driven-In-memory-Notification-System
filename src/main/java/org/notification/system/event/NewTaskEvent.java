@@ -1,8 +1,8 @@
 package org.notification.system.event;
 
-public class NewTaskEvent extends Event {
-    public NewTaskEvent(int id, String details) {
-        super(id, details);
+public class NewTaskEvent extends CustomEvent {
+    public NewTaskEvent(int id, String details, boolean highPriority) {
+        super(id, details, highPriority);
     }
 
     @Override

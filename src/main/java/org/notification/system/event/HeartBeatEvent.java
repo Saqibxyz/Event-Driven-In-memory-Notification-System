@@ -1,12 +1,12 @@
 package org.notification.system.event;
 
-public class HeartBeatEvent extends Event {
-    public HeartBeatEvent(int id, String details) {
-        super(id, details);
+public class HeartBeatEvent extends CustomEvent {
+    public HeartBeatEvent(int id, String details, boolean highPriority) {
+        super(id, details, highPriority);
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "heartBeatEvent";
     }
 
