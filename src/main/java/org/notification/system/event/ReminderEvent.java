@@ -1,6 +1,10 @@
 package org.notification.system.event;
 
 public class ReminderEvent extends CustomEvent {
+    /**
+     * @param details      Details about the event
+     * @param highPriority Whether event has high priority or not
+     */
     public ReminderEvent(String details, boolean highPriority) {
         super(details, highPriority);
     }
