@@ -21,6 +21,7 @@ class ServiceManagerTest {
 
     @BeforeEach
     void setup() {
+
         serviceManager = ServiceManager.getInstanceOfServiceManager();
         serviceManager.eventSubscribersMap.clear();
         serviceManager.history.clear();

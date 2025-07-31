@@ -25,6 +25,12 @@ public class Main {
         Subscriber subscriber3 = new Subscriber("Mohsin",
                 false, false,
                 LocalTime.of(10, 0), LocalTime.of(19, 0));
+        Subscriber subscriber4 = new Subscriber("Sahib",
+                true, false,
+                LocalTime.of(10, 0), LocalTime.of(19, 0));
+        Subscriber subscriber5 = new Subscriber("Zahid",
+                false, false,
+                LocalTime.of(10, 0), LocalTime.of(19, 0));
         // subscribe to events
         serviceManager.subscribe("NewTaskEvent", subscriber1);
         serviceManager.subscribe("NewTaskEvent", subscriber2);
@@ -36,6 +42,10 @@ public class Main {
         eventPublisher.publishNewTaskEvent("review project", false);
         eventPublisher.publishNewTaskEvent("handle exceptions", true);
 
+        admin.viewPastEvents(1);
+        serviceManager.subscribe("ReminderEvent", subscriber4);
+        serviceManager.subscribe("NewTaskEvent", subscriber5);
+        eventPublisher.publishNewTaskEvent("Check bugs", false);
         admin.viewPastEvents(1);
 
 

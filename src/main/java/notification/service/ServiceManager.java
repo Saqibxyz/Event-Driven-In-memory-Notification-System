@@ -59,9 +59,9 @@ public class ServiceManager {
      * @param subscriber Subscriber who wants to subscribe to this event
      */
     public void subscribe(String eventName, Subscriber subscriber) {
-        if (!eventSubscribersMap.containsKey(eventName))
+        if (!eventExists(eventName))
             throw new InvalidEventException("Enter valid Event");
-        eventSubscribersMap.computeIfAbsent(eventName, k -> new CopyOnWriteArrayList<>()).add(subscriber);
+        eventSubscribersMap.get(eventName).add(subscriber);
     }
 
     /**
