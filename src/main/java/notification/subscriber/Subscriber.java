@@ -18,7 +18,9 @@ public class Subscriber {
     LocalTime workingHourEnd;
     Logger logger = LoggerFactory.getLogger(Subscriber.class);
 
-    // prevent from instantiation with default constructor
+    /**
+     * Not letting use default constructor to avoid bugs
+     */
     private Subscriber() {
     }
 
@@ -85,8 +87,7 @@ public class Subscriber {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
-        if (!(obj instanceof Subscriber)) return false;
-        Subscriber other = (Subscriber) obj;
+        if (!(obj instanceof Subscriber other)) return false;
         return this.id.equals(other.id);
     }
 
