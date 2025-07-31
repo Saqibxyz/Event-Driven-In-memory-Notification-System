@@ -80,7 +80,7 @@ src
 
 ## How to Run the App
 
-Make sure you have Maven and Java 17+ installed.
+Make sure you have Maven and Java 8+ installed.
 
 ### Step-by-step:
 
@@ -154,12 +154,10 @@ mvn test
 
 ## Credits
 
-Made by **_Saqib Ayoub_**  
-Designed for performance, modularity, and future extensibility.
----
+_Made by **_Saqib Ayoub_**   
+Designed for performance, modularity_
 
-## License
 
-Free to use, modify, or contribute.
+
 
 
