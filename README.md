@@ -112,22 +112,21 @@ mvn test
 ## Example Run
 
 ```bash
-
-[pool-1-thread-1] INFO notification.subscriber.Subscriber - Mohsin  received ReminderEvent at 31/07/25 03:26:05
-[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib  received NewTaskEvent at 31/07/25 03:26:05
-[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib  received NewTaskEvent at 31/07/25 03:26:05
-[notification.Main.main()] INFO notification.subscriber.Subscriber - Yawar  received NewTaskEvent at 31/07/25 03:26:05
-[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 03:26] ReminderEvent - This is a reminder : [Mohsin]
-[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 03:26] NewTaskEvent - review project : [Saqib]
-[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 03:26] NewTaskEvent - handle exceptions : [Saqib, Yawar]
-[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib  received NewTaskEvent at 31/07/25 03:26:05
-[notification.Main.main()] INFO notification.subscriber.Subscriber - Zahid  received NewTaskEvent at 31/07/25 03:26:05
-[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 03:26] ReminderEvent - This is a reminder : [Mohsin]
-[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 03:26] NewTaskEvent - review project : [Saqib]
-[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 03:26] NewTaskEvent - handle exceptions : [Saqib, Yawar]
-[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 03:26] NewTaskEvent - Check bugs : [Saqib, Zahid]
-[pool-1-thread-1] INFO notification.subscriber.Subscriber - Mohsin  received ReminderEvent at 31/07/25 03:26:15
-[pool-1-thread-1] INFO notification.subscriber.Subscriber - Sahib  received ReminderEvent at 31/07/25 03:26:15
+[pool-1-thread-1] INFO notification.subscriber.Subscriber - Mohsin(69dbea)  received ReminderEvent at 31/07/25 05:47:45
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib(32c898)  received NewTaskEvent at 31/07/25 05:47:45
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib(32c898)  received NewTaskEvent at 31/07/25 05:47:45
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Yawar(f52072)  received NewTaskEvent at 31/07/25 05:47:45
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 05:47] ReminderEvent - This is a reminder : [Mohsin(69dbea)]
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 05:47] NewTaskEvent - review project : [Saqib(32c898)]
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 05:47] NewTaskEvent - handle exceptions : [Saqib(32c898), Yawar(f52072)]
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib(32c898)  received NewTaskEvent at 31/07/25 05:47:45
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Zahid(f23dc6)  received NewTaskEvent at 31/07/25 05:47:45
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 05:47] ReminderEvent - This is a reminder : [Mohsin(69dbea)]
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 05:47] NewTaskEvent - review project : [Saqib(32c898)]
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 05:47] NewTaskEvent - handle exceptions : [Saqib(32c898), Yawar(f52072)]
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 05:47] NewTaskEvent - Check bugs : [Saqib(32c898), Zahid(f23dc6)]
+[pool-1-thread-1] INFO notification.subscriber.Subscriber - Mohsin(69dbea)  received ReminderEvent at 31/07/25 05:48:05
+[pool-1-thread-1] INFO notification.subscriber.Subscriber - Sahib(4c621e)  received ReminderEvent at 31/07/25 05:48:05
 ```
 
 - The ReminderEvent fires every 10 seconds.
