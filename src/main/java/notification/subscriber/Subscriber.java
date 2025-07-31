@@ -91,4 +91,8 @@ public class Subscriber {
         return this.id.equals(other.id);
     }
 
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
