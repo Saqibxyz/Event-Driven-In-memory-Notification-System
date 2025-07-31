@@ -1,14 +1,16 @@
 package notification.subscriber;
 
-import notification.customExceptions.NullObjectException;
 import notification.event.CustomEvent;
+import notification.exceptions.NullObjectException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class Subscriber {
+    String id;
     String name;
     boolean isPreferringHighPriorityEvents = false;
     boolean isPreferringEventsDuringWorkingHours = false;
@@ -35,6 +37,7 @@ public class Subscriber {
     ) {
         if (name == null || name.isEmpty() || workingHourStart == null || workingHourEnd == null)
             throw new NullObjectException("Invalid input");
+        this.id = UUID.randomUUID().toString().substring(0, 6);
         this.name = name;
         this.isPreferringHighPriorityEvents = isPreferringHighPriorityEvents;
         this.isPreferringEventsDuringWorkingHours = isPreferringEventsDuringWorkingHours;
@@ -43,7 +46,7 @@ public class Subscriber {
     }
 
     public String getName() {
-        return name;
+        return name + "(" + this.id + ")";
     }
 
     /**
@@ -52,7 +55,7 @@ public class Subscriber {
      * @param event Event that user has subscribed to
      */
     public void notifySubscriber(CustomEvent event) {
-        logger.info("{}  received {} at {}", name, event.getType(), event.getTimeStamp().format(DateTimeFormatter.ofPattern("dd/MM/yy hh:mm:ss")));
+        logger.info("{}  received {} at {}", getName(), event.getType(), event.getTimeStamp().format(DateTimeFormatter.ofPattern("dd/MM/yy hh:mm:ss")));
 
     }
 
@@ -75,7 +78,16 @@ public class Subscriber {
 
     @Override
     public String toString() {
-        return this.name;
+        return this.name + "(" + this.id + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Subscriber)) return false;
+        Subscriber other = (Subscriber) obj;
+        return this.id.equals(other.id);
     }
 
 }

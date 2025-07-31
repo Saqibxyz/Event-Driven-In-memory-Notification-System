@@ -1,10 +1,10 @@
 package notification.service;
 
-import notification.customExceptions.InvalidEventException;
-import notification.customExceptions.NullObjectException;
 import notification.event.CustomEvent;
 import notification.event.NewTaskEvent;
 import notification.event.ReminderEvent;
+import notification.exceptions.InvalidEventException;
+import notification.exceptions.NullObjectException;
 import notification.subscriber.Subscriber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

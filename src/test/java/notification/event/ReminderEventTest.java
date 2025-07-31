@@ -1,6 +1,6 @@
 package notification.event;
 
-import notification.customExceptions.NullObjectException;
+import notification.exceptions.NullObjectException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

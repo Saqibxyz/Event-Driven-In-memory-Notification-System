@@ -1,6 +1,6 @@
 package notification.event;
 
-import notification.customExceptions.NullObjectException;
+import notification.exceptions.NullObjectException;
 
 import java.time.LocalDateTime;
 

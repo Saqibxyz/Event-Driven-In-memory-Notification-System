@@ -1,4 +1,4 @@
-package notification.customExceptions;
+package notification.exceptions;
 
 public class NullObjectException extends RuntimeException {
     public NullObjectException(String message) {

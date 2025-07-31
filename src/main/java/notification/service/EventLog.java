@@ -1,7 +1,7 @@
 package notification.service;
 
-import notification.customExceptions.NullObjectException;
 import notification.event.CustomEvent;
+import notification.exceptions.NullObjectException;
 import notification.subscriber.Subscriber;
 
 import java.time.format.DateTimeFormatter;
@@ -22,6 +22,9 @@ public class EventLog {
         this.subs = subs;
     }
 
+    /**
+     * @return Returns list of subscribers of the event
+     */
     public List<Subscriber> getSubs() {
         return subs;
     }

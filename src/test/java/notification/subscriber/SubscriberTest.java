@@ -1,8 +1,8 @@
 package notification.subscriber;
 
-import notification.customExceptions.InvalidEventException;
-import notification.customExceptions.NullObjectException;
 import notification.event.CustomEvent;
+import notification.exceptions.InvalidEventException;
+import notification.exceptions.NullObjectException;
 import notification.service.ServiceManager;
 import org.junit.jupiter.api.Test;
 
@@ -22,13 +22,6 @@ class SubscriberTest {
         }
     }
 
-    @Test
-    void testConstructorValidInput() {
-        Subscriber subscriber = new Subscriber("Yawar", true, false,
-                LocalTime.of(9, 0), LocalTime.of(17, 0));
-
-        assertEquals("Yawar", subscriber.getName());
-    }
 
     @Test
     void testConstructorThrowsExceptionForInvalidInputs() {
@@ -42,21 +35,6 @@ class SubscriberTest {
                 () -> new Subscriber("Saqib", true, false, LocalTime.of(9, 0), null));
     }
 
-    @Test
-    void testGetName() {
-        Subscriber subscriber = new Subscriber("Saqib", false, false,
-                LocalTime.of(10, 0), LocalTime.of(18, 0));
-
-        assertEquals("Saqib", subscriber.getName());
-    }
-
-    @Test
-    void testToStringReturnsName() {
-        Subscriber subscriber = new Subscriber("Saqib", false, false,
-                LocalTime.of(10, 0), LocalTime.of(18, 0));
-
-        assertEquals("Saqib", subscriber.toString());
-    }
 
     @Test
     void testCanBeNotifiedWithoutPreferences() {

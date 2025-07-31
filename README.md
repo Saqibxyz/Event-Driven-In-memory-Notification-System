@@ -101,21 +101,6 @@ mvn clean compile
 mvn exec:java
 ```
 
-#### Make sure your `pom.xml` has below plugin for the above command to work
-
-```
- <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-      <version>3.1.0</version>
-      <configuration>
-          <mainClass>notification.Main</mainClass>
-      </configuration>
- </plugin>
-```
-
----
-
 ## How to Run Tests
 
 ```bash
@@ -155,7 +140,7 @@ mvn test
 ## Notable Features
 
 - **Singleton ServiceManager** (one event bus)
-- **Event filtering** based on real-time conditions
+- **Event filtering**
 - **Multithreading** via `ScheduledExecutorService` for timed events
 - **EventLog** tracking and stream-filtered history
 

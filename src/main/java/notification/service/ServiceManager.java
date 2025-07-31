@@ -1,8 +1,8 @@
 package notification.service;
 
-import notification.customExceptions.InvalidEventException;
-import notification.customExceptions.NullObjectException;
 import notification.event.CustomEvent;
+import notification.exceptions.InvalidEventException;
+import notification.exceptions.NullObjectException;
 import notification.subscriber.Subscriber;
 
 import java.time.LocalDateTime;
@@ -38,19 +38,19 @@ public class ServiceManager {
     public void publish(CustomEvent event) {
         if (event == null)
             throw new NullObjectException("Event cannot be null");
-        List<Subscriber> list = new ArrayList<>();
-        if (!eventSubscribersMap.containsKey(event.getType())) {
-            eventSubscribersMap.put(event.getType(), new CopyOnWriteArrayList<>());
+        eventSubscribersMap.computeIfAbsent(event.getType(),
+                k -> new CopyOnWriteArrayList<>());
+
+        List<Subscriber> notifiedSubscribers = new ArrayList<>();
+        for (Subscriber subscriber : eventSubscribersMap.get(event.getType())) {
+            if (subscriber.canBeNotified(event)) {
+                subscriber.notifySubscriber(event);
+                notifiedSubscribers.add(subscriber);
+            }
         }
-        eventSubscribersMap.get(event.getType()).forEach(subscriber -> {
-                    if (subscriber.canBeNotified(event)) {
-                        subscriber.notifySubscriber(event);
-                        list.add(subscriber);
-                    }
-                }
-        );
-        history.add(new EventLog(event, list));
+        history.add(new EventLog(event, notifiedSubscribers));
     }
+
 
     /**
      * Subscribe to an event
@@ -59,10 +59,18 @@ public class ServiceManager {
      * @param subscriber Subscriber who wants to subscribe to this event
      */
     public void subscribe(String eventName, Subscriber subscriber) {
-        if (!eventExists(eventName))
+        if (!eventExists(eventName)) {
             throw new InvalidEventException("Enter valid Event");
-        eventSubscribersMap.get(eventName).add(subscriber);
+        }
+        boolean exists = eventSubscribersMap.get(eventName)
+                .stream()
+                .anyMatch(subs -> subs.equals(subscriber));
+
+        if (!exists) {
+            eventSubscribersMap.get(eventName).add(subscriber);
+        }
     }
+
 
     /**
      * Retuns List of subscribers of an event
