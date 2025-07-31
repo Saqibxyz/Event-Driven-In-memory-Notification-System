@@ -1,5 +1,7 @@
 package notification.concurrency;
 
+import notification.event.NewTaskEvent;
+import notification.event.ReminderEvent;
 import notification.service.ServiceManager;
 import notification.subscriber.Subscriber;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,8 @@ public class ConcurrentSubscriptionTest {
     @Test
     public void testConcurrentSubscription() {
         ServiceManager serviceManager = new ServiceManager();// for testing
-
+        serviceManager.publish(new NewTaskEvent("Some event", false));
+        serviceManager.publish(new ReminderEvent("Some reminder event", false));
 
         Subscriber s1 = new Subscriber("Saqib", true, false,
                 LocalTime.of(9, 0), LocalTime.of(18, 0));
@@ -34,7 +37,7 @@ public class ConcurrentSubscriptionTest {
                 LocalTime.of(11, 0), LocalTime.of(20, 0));
 
         ArrayList<Subscriber> list = new ArrayList<>(Arrays.asList(s1, s2, s3, s4, s5));
-        String[] events = {"NewTaskEvent", "OtherEvent"};
+        String[] events = {"NewTaskEvent", "ReminderEvent"};
 
         Thread[] threads = new Thread[5];
 
@@ -53,7 +56,7 @@ public class ConcurrentSubscriptionTest {
             }
         }
         assertEquals(3, serviceManager.getEventSubscribers("NewTaskEvent").size());
-        assertEquals(2, serviceManager.getEventSubscribers("OtherEvent").size());
+        assertEquals(2, serviceManager.getEventSubscribers("ReminderEvent").size());
     }
 
 }

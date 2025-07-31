@@ -154,8 +154,7 @@ mvn test
 
 ## Credits
 
-_Made by **_Saqib Ayoub_**   
-Designed for performance, modularity_
+_Made by **_Saqib Ayoub_**_
 
 
 

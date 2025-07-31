@@ -1,7 +1,9 @@
 package notification.subscriber;
 
+import notification.customExceptions.InvalidEventException;
 import notification.customExceptions.NullObjectException;
 import notification.event.CustomEvent;
+import notification.service.ServiceManager;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
@@ -98,5 +100,16 @@ class SubscriberTest {
         CustomEvent event = new TestEvent("Task", false);
 
         assertFalse(subscriber.canBeNotified(event));
+    }
+
+    @Test
+    void testSubscribeToInvalidEvent() {
+        ServiceManager serviceManager = ServiceManager.getInstanceOfServiceManager();
+
+        Subscriber subscriber = new Subscriber("Saqib", false, false,
+                LocalTime.of(9, 0), LocalTime.of(17, 0));
+
+        assertThrows(InvalidEventException.class,
+                () -> serviceManager.subscribe("RandomEvent", subscriber));
     }
 }

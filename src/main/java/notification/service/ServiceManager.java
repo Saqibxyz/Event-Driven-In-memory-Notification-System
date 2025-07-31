@@ -1,5 +1,6 @@
 package notification.service;
 
+import notification.customExceptions.InvalidEventException;
 import notification.customExceptions.NullObjectException;
 import notification.event.CustomEvent;
 import notification.subscriber.Subscriber;
@@ -13,7 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServiceManager {
-    Map<String, CopyOnWriteArrayList<Subscriber>> eventSubscribersMap = new ConcurrentHashMap<>();
+    Map<String, CopyOnWriteArrayList<Subscriber>> eventSubscribersMap =
+            new ConcurrentHashMap<>() {{
+                put("NewTaskEvent", new CopyOnWriteArrayList<>());
+                put("ReminderEvent", new CopyOnWriteArrayList<>());
+            }};
+
     List<EventLog> history = new CopyOnWriteArrayList<>();
     static ServiceManager serviceManager = new ServiceManager();
 
@@ -53,9 +59,17 @@ public class ServiceManager {
      * @param subscriber Subscriber who wants to subscribe to this event
      */
     public void subscribe(String eventName, Subscriber subscriber) {
+        if (!eventSubscribersMap.containsKey(eventName))
+            throw new InvalidEventException("Enter valid Event");
         eventSubscribersMap.computeIfAbsent(eventName, k -> new CopyOnWriteArrayList<>()).add(subscriber);
     }
 
+    /**
+     * Retuns List of subscribers of an event
+     *
+     * @param eventType Event Type
+     * @return returns a list containing Subscribers of the event
+     */
     public List<Subscriber> getEventSubscribers(String eventType) {
         if (eventSubscribersMap.containsKey(eventType)) {
             return eventSubscribersMap.get(eventType);

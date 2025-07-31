@@ -16,6 +16,7 @@ public class ConcurrentPublisherTest {
     @Test
     void ConcurrentTest() throws InterruptedException {
         ServiceManager serviceManager = ServiceManager.getInstanceOfServiceManager();
+
         Subscriber s1 = new Subscriber("Saqib", true, false,
                 LocalTime.of(9, 0), LocalTime.of(18, 0));
         Subscriber s2 = new Subscriber("Yawar", false, true,
@@ -24,8 +25,8 @@ public class ConcurrentPublisherTest {
                 LocalTime.of(10, 0), LocalTime.of(19, 0));
 
         serviceManager.subscribe("NewTaskEvent", s1);
+        serviceManager.subscribe("NewTaskEvent", s3);
         serviceManager.subscribe("ReminderEvent", s2);
-        serviceManager.subscribe("OtherEvent", s3);
 
         EventPublisher publisher = new EventPublisher();
 
@@ -46,6 +47,7 @@ public class ConcurrentPublisherTest {
         for (Thread t : threads) {
             t.join();
         }
+        // including first 2, so total of 7 events
         assertEquals(5, serviceManager.getPastEvents(100).size(),
                 "Total 5 events should be published in history");
         assertTrue(serviceManager.eventExists("NewTaskEvent"));
