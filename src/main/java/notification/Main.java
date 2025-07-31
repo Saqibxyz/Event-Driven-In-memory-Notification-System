@@ -1,18 +1,14 @@
-package notification_system;
+package notification;
 
-import notification_system.admin.Admin;
-import notification_system.customExceptions.NullObjectException;
-import notification_system.publisher.EventPublisher;
-import notification_system.publisher.EventReminder;
-import notification_system.service.ServiceManager;
-import notification_system.subscriber.Subscriber;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import notification.admin.Admin;
+import notification.publisher.EventPublisher;
+import notification.publisher.EventReminder;
+import notification.service.ServiceManager;
+import notification.subscriber.Subscriber;
 
 import java.time.LocalTime;
 
 public class Main {
-    static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
         ServiceManager serviceManager = ServiceManager.getInstanceOfServiceManager();
@@ -37,12 +33,9 @@ public class Main {
         eventReminder.publishReminder();
         // publish NewEventTask
 
-        try {
-            eventPublisher.publishNewTaskEvent("review project", false);
-            eventPublisher.publishNewTaskEvent("handle exceptions", true);
-        } catch (NullObjectException e) {
-            logger.error(e.getMessage());
-        }
+        eventPublisher.publishNewTaskEvent("review project", false);
+        eventPublisher.publishNewTaskEvent("handle exceptions", true);
+
         admin.viewPastEvents(1);
 
 

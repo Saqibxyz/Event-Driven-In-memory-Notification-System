@@ -40,7 +40,7 @@ The image below shows how it all flows:
 src
 ├── main
 │   └── java
-│       └── notification_system
+│       └── notification
 │           ├── admin
 │           │   └── Admin.java
 │           ├── customExceptions
@@ -60,8 +60,20 @@ src
 │           └── Main.java
 └── test
     └── java
-        └── org.notification.system.admin
-            └── AdminTest.java (sample location)
+        └── notification
+            ├── concurrency
+            │   ├── ConcurrentPublisherTest.java
+            │   └── ConcurrentSubscriptionTest.java
+            ├── event
+            │   ├── CustomEventTest.java
+            │   ├── NewTaskEventTest.java
+            │   └── ReminderEventTest.java
+            ├── publisher
+            │   └── EventPublisherTest.java
+            ├── service
+            │   └── ServiceManagerTest.java
+            └── subscriber
+                └── SubscriberTest.java
 ```
 
 ---
@@ -97,7 +109,7 @@ mvn exec:java
       <artifactId>exec-maven-plugin</artifactId>
       <version>3.1.0</version>
       <configuration>
-          <mainClass>notification_system.Main</mainClass>
+          <mainClass>notification.Main</mainClass>
       </configuration>
  </plugin>
 ```
@@ -115,13 +127,13 @@ mvn test
 ## Example Run
 
 ```bash
-[notification_system.Main.main()] INFO notification_system.subscriber.Subscriber - Saqib  received NewTaskEvent at 31/07/25 12:35:58
-[pool-1-thread-1] INFO notification_system.subscriber.Subscriber - Mohsin  received ReminderEvent at 31/07/25 12:35:58
-[notification_system.Main.main()] INFO notification_system.subscriber.Subscriber - Saqib  received NewTaskEvent at 31/07/25 12:35:58
-[notification_system.Main.main()] INFO notification_system.subscriber.Subscriber - Yawar  received NewTaskEvent at 31/07/25 12:35:58
-[notification_system.Main.main()] INFO notification_system.admin.Admin - [31/07/25 12:35] NewTaskEvent - review project : [Saqib]
-[notification_system.Main.main()] INFO notification_system.admin.Admin - [31/07/25 12:35] ReminderEvent - This is a reminder : [Mohsin]
-[notification_system.Main.main()] INFO notification_system.admin.Admin - [31/07/25 12:35] NewTaskEvent - handle exceptions : [Saqib, Yawar]
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib  received NewTaskEvent at 31/07/25 12:35:58
+[pool-1-thread-1] INFO notification.subscriber.Subscriber - Mohsin  received ReminderEvent at 31/07/25 12:35:58
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Saqib  received NewTaskEvent at 31/07/25 12:35:58
+[notification.Main.main()] INFO notification.subscriber.Subscriber - Yawar  received NewTaskEvent at 31/07/25 12:35:58
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 12:35] NewTaskEvent - review project : [Saqib]
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 12:35] ReminderEvent - This is a reminder : [Mohsin]
+[notification.Main.main()] INFO notification.admin.Admin - [31/07/25 12:35] NewTaskEvent - handle exceptions : [Saqib, Yawar]
 ```
 
 - The ReminderEvent fires every 10 seconds.

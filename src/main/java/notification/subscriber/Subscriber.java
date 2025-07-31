@@ -1,12 +1,12 @@
-package notification_system.subscriber;
+package notification.subscriber;
 
-import notification_system.event.CustomEvent;
+import notification.customExceptions.NullObjectException;
+import notification.event.CustomEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.InputMismatchException;
 
 public class Subscriber {
     String name;
@@ -34,7 +34,7 @@ public class Subscriber {
 
     ) {
         if (name == null || name.isEmpty() || workingHourStart == null || workingHourEnd == null)
-            throw new InputMismatchException("Invalid input");
+            throw new NullObjectException("Invalid input");
         this.name = name;
         this.isPreferringHighPriorityEvents = isPreferringHighPriorityEvents;
         this.isPreferringEventsDuringWorkingHours = isPreferringEventsDuringWorkingHours;

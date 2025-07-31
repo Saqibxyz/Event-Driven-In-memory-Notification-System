@@ -1,8 +1,8 @@
-package notification_system.service;
+package notification.service;
 
-import notification_system.customExceptions.NullObjectException;
-import notification_system.event.CustomEvent;
-import notification_system.subscriber.Subscriber;
+import notification.customExceptions.NullObjectException;
+import notification.event.CustomEvent;
+import notification.subscriber.Subscriber;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -15,11 +15,15 @@ public class EventLog {
      * @param event Event
      * @param subs  List of subscribers notified by the event
      */
-    public EventLog(CustomEvent event, List<Subscriber> subs) throws NullObjectException {
+    public EventLog(CustomEvent event, List<Subscriber> subs) {
         if (event == null)
             throw new NullObjectException("Event cannot be null");
         this.event = event;
         this.subs = subs;
+    }
+
+    public List<Subscriber> getSubs() {
+        return subs;
     }
 
     @Override
